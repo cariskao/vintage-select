@@ -1,17 +1,15 @@
 <template>
   <div>
-    index
+    Aboutus
   </div>
 </template>
 
 <script>
-
 export default {
-  components: {
-    
-  }
+
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
+
 </style>

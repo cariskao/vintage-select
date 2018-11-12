@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Store({
   state: {
-    test: 'hahahaha'
   },
   getters: {
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    index
+    cart
   </div>
 </template>
 
@@ -13,5 +13,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
+
 </style>
