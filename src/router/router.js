@@ -8,8 +8,8 @@ import AboutUs from '@/components/pages/AboutUs'
 import BrandIntro from '@/components/pages/BrandIntro'
 import Shopping from '@/components/pages/Shopping'
 import Cart from '@/components/pages/Cart'
-
-
+import ProductList from '@/components/ProductList'
+import ProductDetail from '@/components/ProductDetail'
 
 export default new Router({
   routes: [
@@ -28,11 +28,21 @@ export default new Router({
         },
         {
           path: 'brandintro',
-          component: BrandIntro
+          component: BrandIntro,
         },
         {
           path: 'shopping',
-          component: Shopping
+          component: Shopping,
+          children: [
+            {
+              path: ':filter',
+              component: ProductList
+            },
+            {
+              path: 'detail/:id',
+              component: ProductDetail
+            }
+          ]
         },
         {
           path: 'cart',

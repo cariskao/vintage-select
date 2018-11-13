@@ -1,6 +1,7 @@
 <template>
   <div>
     brandintro
+    <button @click="ha">click</button>
   </div>
 </template>
 
@@ -9,6 +10,10 @@
 export default {
   components: {
     
+  },
+  methods: {
+    ha(){        
+    }
   }
 }
 </script>

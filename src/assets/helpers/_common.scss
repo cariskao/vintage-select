@@ -9,6 +9,16 @@
   overflow-y: visible;
 }
 
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
 .text-italic {
   font-style: italic;
 }
@@ -29,6 +39,10 @@
   &:active {
     opacity: 1;
   }
+}
+
+.router-link-exact-active {
+  color: $colorSecondary;
 }
 
 .mt-1 {
