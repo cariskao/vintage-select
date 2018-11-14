@@ -2,20 +2,22 @@
   <div class="product-list-container">
     <ul class="product-list">
       <ProductListItem
-        v-for="product in filterProducts"
+        v-for="product in filterCurrentPageProducts"
         :key="product.id"
         :productInfo="product"
       />
     </ul>
 
-    <h3 class="text-center" v-if="filterProducts.length === 0">暫無資料</h3>
+    <h4 class="text-center" v-if="filterProducts.length === 0">暫無資料</h4>
+
+    <hr>
 
     <Pagination/>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import ProductListItem from '@/components/ProductListItem'
 import Pagination from '@/components/Pagination'
 export default {
@@ -24,14 +26,16 @@ export default {
     Pagination
   },
   computed: {
-    ...mapState('product', ['products']),
+    ...mapState('product', ['products', 'pageLimit']),
     ...mapGetters('product', [
       'enabledProducts',
-      'onSaleProducts',
-      // 'typeCategoryFilter',
-      // 'brandCategoryFilter'
+      'onSaleProducts'
     ]),
+    currentPage(){
+      return this.$route.query.page
+    },
     filterProducts(){
+      // 基於這個filterProducts中再藉由page切出陣列
       switch(this.$route.params.filter){
         case 'all':
           return this.enabledProducts
@@ -57,19 +61,21 @@ export default {
           return []
           break
       }
+    },
+    filterCurrentPageProducts(){
+      return this.filterProducts.filter((item, index) => 
+        index >= (this.currentPage - 1) * this.pageLimit && index <= this.currentPage * this.pageLimit - 1
+      )
     }
-  },
-  methods: {
-    ...mapActions('product', ['getProducts'])
   },
   watch: {
-    $route(to){
-      console.log('to的queryString', to.query)
-    }
+    // 原本要藉由watch渲染，結果用computed就可以
+    // $route(to){
+    //   console.log('to的queryString', to.query)
+    // }
   },
   mounted(){
-    this.getProducts()
-    console.log(this.$route)
+    console.log('productList', this.$route)
 
     // fullPath: "/shopping/all?brand='WTAPS'"
     // hash: ""

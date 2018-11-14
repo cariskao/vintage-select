@@ -4,8 +4,8 @@ export default {
   namespaced: true,
   state: {
     products: [],
-    product:{},
-    pagination: {},
+    product:{},      // 暫存查看單筆商品詳細資料
+    pageLimit: 10,   // 單頁資料筆數
     isPageLoading: false,
   },
   getters: {
@@ -37,17 +37,17 @@ export default {
     setProducts(state, data){
       state.products = data
     },
-    setPagination(state, pagination){
-      state.pagination = pagination
+    setPageLimit(state, value){
+      state.pageLimit = value
     },
     setPageLoading(state, boolean){
       state.isPageLoading = boolean
     }
   },
   actions: {
-    getProducts({commit}, page = 1){
+    getProducts({commit}){
       const API = `
-        ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/products?page=${page}
+        ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/products/all
       `
       commit('setPageLoading', true)
       axios.get(API)
@@ -55,7 +55,6 @@ export default {
           console.log('getProducts', data)        
 
           commit('setProducts', data.products)
-          commit('setPagination', data.pagination)
           commit('setPageLoading', false)
         })
         .catch(err => {
@@ -68,7 +67,6 @@ export default {
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/product/${id}
       `
       // 因為可能產品未啟用所以才這樣寫
-      // 彈窗在觸發在page組件，用promise處理是否開啟彈窗
       return new Promise((resolve, reject) => {
         axios.get(API)
           .then( ({data}) => {
@@ -115,8 +113,5 @@ export default {
         })
         .catch(err => console.error(err))
     },
-    test(context, num){
-      return num
-    }
   }
 }

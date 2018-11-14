@@ -3,10 +3,20 @@
     <h4>分類</h4>
     <ul>
       <li>
-        <router-link to="/shopping/all">全部</router-link>
+        <router-link :to="{
+          path: '/shopping/all',
+          query: {
+            page: 1
+          }
+        }">全部</router-link>
       </li>
       <li>
-        <router-link to="/shopping/sale">特價</router-link>
+        <router-link :to="{
+          path: '/shopping/sale',
+          query: {
+            page: 1
+          }
+        }">特價</router-link>
       </li>
       <li>
         <span>類型</span>

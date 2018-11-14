@@ -7,9 +7,10 @@
     >
       <router-link
         :to="{
-          path: category,
+          path: `/shopping/${category}`,
           query: {
-            [category]: item
+            [category]: item,
+            page: 1
           }
         }"
       >{{item}}</router-link>
@@ -28,7 +29,7 @@ export default {
   },
   computed: {
     filterCategory(){
-      return this.$store.getters[`product/${this.category}CategoryFilter`]
+      return this.$store.getters[ `product/${this.category}CategoryFilter` ]
     },
   },
 }

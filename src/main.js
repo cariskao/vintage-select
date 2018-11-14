@@ -20,6 +20,12 @@ import Icon from 'vue-awesome/components/Icon'
 Vue.component('v-icon', Icon)
 // -----------
 
+// vue-loading-overlay
+import Loading from 'vue-loading-overlay'
+import 'vue-loading-overlay/dist/vue-loading.css'
+Vue.component('Loading', Loading)
+// ----------
+
 // vee-validate
 // 已安裝未啟用
 // -----------

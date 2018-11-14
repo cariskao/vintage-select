@@ -1,12 +1,13 @@
 <template>
   <div class="shopping-container">
+    <Loading :active.sync="isLoading"/>
     <SideBar/>
     <router-view></router-view>
-    <!-- <productList/> -->
   </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import SideBar from '@/components/SideBar'
 import ProductList from '@/components/ProductList'
 export default {
@@ -14,7 +15,18 @@ export default {
     SideBar,
     ProductList
   },
-  
+  computed: {
+    ...mapState('product', {
+      isLoading: 'isPageLoading'
+    })
+  },
+  methods: {
+    ...mapActions('product', ['getProducts'])
+  },
+  mounted(){
+    console.log(this.getProducts())
+    this.getProducts()
+  }
 }
 </script>
 

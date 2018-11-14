@@ -15,7 +15,7 @@
           <router-link class="btn" to="/brandintro">品牌介紹</router-link>
         </li>
         <li>
-          <router-link class="btn" to="/shopping">購物商城</router-link>
+          <router-link class="btn" to="/shopping/all?page=1">購物商城</router-link>
         </li>
       </ul>
     </nav>
