@@ -1,11 +1,13 @@
 import axios from 'axios'
+import router from '../router/router'
 
 export default {
   namespaced: true,
   state: {
     products: [],
-    product:{},      // 暫存查看單筆商品詳細資料
-    pageLimit: 10,   // 單頁資料筆數
+    product:{},           // 暫存查看單筆商品詳細資料
+    pageLimit: 10,        // 單頁資料筆數
+    // searchFilter: '',     // 搜尋商品
     isPageLoading: false,
   },
   getters: {
@@ -39,6 +41,9 @@ export default {
     },
     setPageLimit(state, value){
       state.pageLimit = value
+    },
+    setSearchFilter(state, value){
+      state.searchFilter = value
     },
     setPageLoading(state, boolean){
       state.isPageLoading = boolean
@@ -113,5 +118,14 @@ export default {
         })
         .catch(err => console.error(err))
     },
+    searchProducts(context, value){
+      router.push({
+        path: '/shopping/search',
+        query: {
+          search: value,
+          page: 1
+        }
+      })
+    }
   }
 }

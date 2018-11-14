@@ -1,5 +1,8 @@
 <template>
   <div class="product-list-container">
+
+    <ProductSearchInput/>
+
     <ul class="product-list">
       <ProductListItem
         v-for="product in filterCurrentPageProducts"
@@ -13,15 +16,18 @@
     <hr>
 
     <Pagination/>
+
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
 import ProductListItem from '@/components/ProductListItem'
+import ProductSearchInput from '@/components/ProductSearchInput'
 import Pagination from '@/components/Pagination'
 export default {
   components: {
+    ProductSearchInput,
     ProductListItem,
     Pagination
   },
@@ -57,6 +63,13 @@ export default {
             // 還要做暫無資料的提示
           )
           break
+        case 'search':
+          const searchFilter = this.$route.query.search
+          return this.enabledProducts.filter(
+            ({ title }) => title.match(searchFilter)
+            // 還要做暫無資料的提示
+          )
+          break
         default:
           return []
           break
@@ -67,24 +80,6 @@ export default {
         index >= (this.currentPage - 1) * this.pageLimit && index <= this.currentPage * this.pageLimit - 1
       )
     }
-  },
-  watch: {
-    // 原本要藉由watch渲染，結果用computed就可以
-    // $route(to){
-    //   console.log('to的queryString', to.query)
-    // }
-  },
-  mounted(){
-    console.log('productList', this.$route)
-
-    // fullPath: "/shopping/all?brand='WTAPS'"
-    // hash: ""
-    // matched: (3) [{…}, {…}, {…}]
-    // meta: {}
-    // name: undefined
-    // params: {filter: "all"}
-    // path: "/shopping/all"
-    // query: {brand: ""WTAPS""}
   }
 }
 </script>

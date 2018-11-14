@@ -79,6 +79,15 @@ export default {
           return Math.ceil( data.length / this.pageLimit )
           break
         }
+        case 'search': {
+          const searchFilter = this.$route.query.search
+          const data = this.enabledProducts.filter(
+            ({ title }) => title.match(searchFilter)
+            // 還要做暫無資料的提示
+          )
+          return Math.ceil( data.length / this.pageLimit )
+          break
+        }
         default:
           return 1
           break

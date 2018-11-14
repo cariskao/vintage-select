@@ -14,6 +14,7 @@ Vue.use(VueAxios, axios)
 
 // vue-awesome
 import 'vue-awesome/icons/flag'
+import 'vue-awesome/icons/search'
 import 'vue-awesome/icons/shopping-cart'
 
 import Icon from 'vue-awesome/components/Icon'
