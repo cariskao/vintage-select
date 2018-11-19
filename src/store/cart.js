@@ -92,23 +92,20 @@ export default {
         })
         .catch(err => console.error(err))
     },
-    createOrder({commit, dispatch}, order){
+    createOrder({dispatch}, order){
       const API = `
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/order
       `
-      // commit('setPageLoading', true)
       return axios.post(API, {data: order} )
         .then( ({data}) => {
           console.log(data)
 
-          // commit('setPageLoading', false)
-
-          // dispatch('alert/updateMessage', {
-          //   message: data.message,
-          //   status: data.success === true
-          //     ? 'success'
-          //     : 'danger'
-          // }, { root: true})
+          dispatch('alert/updateMessage', {
+            message: data.message,
+            status: data.success === true
+              ? 'success'
+              : 'danger'
+          }, { root: true})
 
           if(data.success){
             dispatch('getCart')

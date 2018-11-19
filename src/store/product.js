@@ -112,12 +112,12 @@ export default {
         .then( ({data}) => {
           console.log(data)
 
-          // dispatch('alert/updateMessage', {
-          //   message: data.message,
-          //   status: data.success === true
-          //     ? 'success'
-          //     : 'danger'
-          // }, { root: true})
+          dispatch('alert/updateMessage', {
+            message: data.message,
+            status: data.success === true
+              ? 'success'
+              : 'danger'
+          }, { root: true})
 
           // 要給按鈕判斷啟用，因此拿到productDetail組件內then來dispatch
           // dispatch('cart/getCart', null, { root: true } )

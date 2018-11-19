@@ -73,15 +73,6 @@
         to="/shopping/all?page=1"
       >繼續逛逛</router-link>
 
-      
-      <!-- <div class="text-right">
-        <button class="btn btn-danger"
-          v-if="order.is_paid === false"
-        >確認付款</button>
-        <router-link class="btn btn-primary" to="/simulate_order"
-          v-else
-        >返回商品頁</router-link>
-      </div> -->
     </div>
   </div>
 </template>
@@ -106,7 +97,14 @@ export default {
     payOrder(){
       this.setPageLoading(true)
       this.$store.dispatch('order/payOrder', this.orderId)
-        .then(() => {
+        .then((data) => {
+          this.$store.dispatch('alert/updateMessage', {
+            message: data.message,
+            status: data.success === true
+              ? 'success'
+              : 'danger'
+          })
+          
           this.getOrder(this.orderId)
             .then(() => this.setPageLoading(false))
         })

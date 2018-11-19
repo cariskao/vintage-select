@@ -35,20 +35,17 @@ export default {
           commit('setPageLoading', false)
         })
     },
-    payOrder({commit, dispatch}, orderId){
+    payOrder({commit}, orderId){
       const API = `
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/pay/${orderId}
       `
       
-      axios.post(API)
+      return axios.post(API)
         .then( ({data}) => {
           console.log(data)
 
           // 防呆因此在組件內操作讀取效果
-          // if(data.success){
-          //   dispatch('getOrder', orderId)
-          // }
-          
+          return data
         })
         .catch(err => {
           console.error(err)
