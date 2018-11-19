@@ -1,8 +1,9 @@
 <template>
   <aside class="side-bar">
-    <h4>分類</h4>
-    <ul>
-      <li>
+    <ProductSearchInput class="mb-3"/>
+    <div class="h5">分類</div>
+    <ul class="nav d-flex flex-column">
+      <li class="nav-item">
         <router-link :to="{
           path: '/shopping/all',
           query: {
@@ -10,7 +11,7 @@
           }
         }">全部</router-link>
       </li>
-      <li>
+      <li class="nav-item">
         <router-link :to="{
           path: '/shopping/sale',
           query: {
@@ -18,13 +19,14 @@
           }
         }">特價</router-link>
       </li>
-      <li>
-        <span>類型</span>
-        <SideBarSelect category="type"/>
+      <li class="nav-item">
+        <!-- <a data-toggle="collapse" data-target="#typeCollapse">類型</a> -->
+        <span>類別</span>
+        <SideBarCollapse category="type"/>
       </li>
-      <li>
+      <li class="nav-item">
         <span>品牌</span>
-        <SideBarSelect category="brand"/>
+        <SideBarCollapse category="brand"/>
       </li>
     </ul>
   </aside>
@@ -32,11 +34,18 @@
 
 <script>
 // 或許可以拆為SideBarMenu
-import { mapState, mapGetters } from 'vuex'
-import SideBarSelect from '@/components/SideBarSelect'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import ProductSearchInput from '@/components/ProductSearchInput'
+import SideBarCollapse from '@/components/SideBarCollapse'
 export default {
   components: {
-    SideBarSelect
+    ProductSearchInput,
+    SideBarCollapse
+  },
+  data(){
+    return{
+      // current: '' 還沒用到
+    }
   },
   computed: {
     ...mapState('product', ['products']),
@@ -47,15 +56,16 @@ export default {
       'onSaleProducts'
     ])
   },
-  data(){
-    return{
-      current: ''
-    }
+  methods: {
+    ...mapActions('product', ['getProducts']),
   },
   watch: {
     $route(){
       
     }
+  },
+  mounted(){
+    this.getProducts()
   }
 }
 </script>

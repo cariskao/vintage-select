@@ -1,15 +1,15 @@
 <template>
-  <div class="product-list-container">
+  <div>
+    <Loading :active.sync="isPageLoading"/>
 
-    <ProductSearchInput/>
-
-    <ul class="product-list">
+    <div class="row">
       <ProductListItem
         v-for="product in filterCurrentPageProducts"
         :key="product.id"
         :productInfo="product"
+        @click.native="showProductDetail(product.id)"
       />
-    </ul>
+    </div>
 
     <h4 class="text-center" v-if="filterProducts.length === 0">暫無資料</h4>
 
@@ -23,16 +23,14 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import ProductListItem from '@/components/ProductListItem'
-import ProductSearchInput from '@/components/ProductSearchInput'
 import Pagination from '@/components/Pagination'
 export default {
   components: {
-    ProductSearchInput,
     ProductListItem,
     Pagination
   },
   computed: {
-    ...mapState('product', ['products', 'pageLimit']),
+    ...mapState('product', ['products', 'pageLimit', 'isPageLoading']),
     ...mapGetters('product', [
       'enabledProducts',
       'onSaleProducts'
@@ -80,14 +78,16 @@ export default {
         index >= (this.currentPage - 1) * this.pageLimit && index <= this.currentPage * this.pageLimit - 1
       )
     }
+  },
+  methods: {
+    showProductDetail(id){
+      this.$router.push(`/shopping/detail/${id}`)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-}
+
 </style>
 

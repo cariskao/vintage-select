@@ -1,32 +1,51 @@
 <template>
-  <div>
-    <select v-model="pageLimitSelect" name="" id="">
-      <option 
-        v-for="value in pageLimitList"
-        :key="value"
-        :value="value"
-      >每頁顯示{{ value }}筆</option>
-    </select>
+  <nav class="d-flex align-items-sm-center flex-column flex-sm-row">
 
-    <ul class="pagination">
-      <li v-if="currentPage !== 1">
-        <router-link :to="linkTo(currentPage - 1)">上一頁</router-link>
+    <div class="dropdown mr-sm-3 mb-2 mb-sm-0">
+      <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        顯示 {{pageLimit}} 筆
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#"
+          v-for="value in pageLimitList"
+          :key="value"
+          @click.prevent="setPageLimit(value)"
+        >
+          {{value}} 筆
+        </a>
+      </div>
+    </div>
+
+    <ul class="pagination d-flex m-0"
+      v-if="totalPage > 1"
+    >
+      <li class="p-1" v-if="currentPage !== 1">
+        <router-link class="p-2 d-flex justify-content-center align-items-center text-dark"
+          :to="linkTo(currentPage - 1)"
+          @click.native="scrollToTop"
+        ><v-icon name="angle-left" scale="1.4"/></router-link>
       </li>
-      <li
+      <li class="h5 p-1 mb-0 d-flex justify-content-center align-items-center"
         v-for="page in totalPage"
         :key="page"
       >
-        <router-link :to="linkTo(page)">{{ page }}</router-link>
+        <router-link class="p-2 text-dark"
+          :to="linkTo(page)"
+          @click.native="scrollToTop"
+        >{{ page }}</router-link>
       </li>
-      <li v-if="currentPage !== totalPage">
-        <router-link :to="linkTo(currentPage + 1)">下一頁</router-link>
+      <li class="p-1" v-if="currentPage !== totalPage">
+        <router-link class="p-2 d-flex justify-content-center align-items-center text-dark" 
+          :to="linkTo(currentPage + 1)"
+          @click.native="scrollToTop"
+        ><v-icon name="angle-right" scale="1.4"/></router-link>
       </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>
-// 分頁邏輯，全靠路由訊息做運算
+// 分頁邏輯，全依賴路由訊息做運算
 import { mapGetters, mapState } from 'vuex'
 export default {
   data(){
@@ -40,18 +59,6 @@ export default {
       'enabledProducts',
       'onSaleProducts'
     ]),
-    pageLimitSelect: {
-      get(){
-        return this.$store.state.product.pageLimit
-      },
-      set(val){
-        this.$store.commit('product/setPageLimit', val)
-        // 如果總頁數小於當前頁面，跳轉到最後一頁
-        if(this.totalPage < this.currentPage){
-          this.$router.push( this.linkTo(this.totalPage) )
-        }
-      }
-    },
     currentPage(){
       return Number(this.$route.query.page)
     },
@@ -101,16 +108,21 @@ export default {
       // 這邊已將從$route物件取得的page字串重新賦值為函數帶入的數字
       query.page = page 
       return { query }
+    },
+    setPageLimit(val){
+      this.$store.commit('product/setPageLimit', val)
+      // 如果總頁數小於當前頁面，跳轉到最後一頁
+      if(this.totalPage < this.currentPage){
+        this.$router.push( this.linkTo(this.totalPage) )
+      }
+    },
+    scrollToTop(){
+      window.scrollTo(0, 0)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.pagination {
-  display: flex;
-}
-li {
-  padding: 10px;
-}
+
 </style>

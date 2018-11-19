@@ -5,7 +5,12 @@ export default {
   namespaced: true,
   state: {
     products: [],
-    product:{},           // 暫存查看單筆商品詳細資料
+    product:{         // 暫存查看單筆商品詳細資料
+      category: {
+        brand: '',
+        type: ''
+      }
+    },           
     pageLimit: 10,        // 單頁資料筆數
     // searchFilter: '',     // 搜尋商品
     isPageLoading: false,
@@ -71,11 +76,14 @@ export default {
       const API = `
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/product/${id}
       `
+      commit('setPageLoading', true)
       // 因為可能產品未啟用所以才這樣寫
       return new Promise((resolve, reject) => {
         axios.get(API)
           .then( ({data}) => {
             console.log(data)
+
+            commit('setPageLoading', false)
             if(data.success){
               commit('setProduct', data.product)
               resolve()
@@ -90,31 +98,29 @@ export default {
           })
           .catch(err => {
             commit('setProduct', {})
+            commit('setPageLoading', false)
             reject(err)
           })
       })
     },
-    addToCart({dispatch}, {id, qty = 1}){
+    addToCart({dispatch}, data){
       const API = `
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/cart
       `
-      const product = {
-        'product_id': id,
-        qty
-      }
 
-      return axios.post(API, { data: product })
+      return axios.post(API, { data })
         .then( ({data}) => {
           console.log(data)
 
-          dispatch('alert/updateMessage', {
-            message: data.message,
-            status: data.success === true
-              ? 'success'
-              : 'danger'
-          }, { root: true})
+          // dispatch('alert/updateMessage', {
+          //   message: data.message,
+          //   status: data.success === true
+          //     ? 'success'
+          //     : 'danger'
+          // }, { root: true})
 
-          dispatch('getCart')
+          // 要給按鈕判斷啟用，因此拿到productDetail組件內then來dispatch
+          // dispatch('cart/getCart', null, { root: true } )
         })
         .catch(err => console.error(err))
     },

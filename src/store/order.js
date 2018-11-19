@@ -39,15 +39,16 @@ export default {
       const API = `
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/pay/${orderId}
       `
-      commit('setPageLoading', true)
+      
       axios.post(API)
         .then( ({data}) => {
           console.log(data)
 
-          if(data.success){
-            dispatch('getOrder', orderId)
-          }
-          commit('setPageLoading', false)
+          // 防呆因此在組件內操作讀取效果
+          // if(data.success){
+          //   dispatch('getOrder', orderId)
+          // }
+          
         })
         .catch(err => {
           console.error(err)

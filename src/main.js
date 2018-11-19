@@ -6,6 +6,8 @@ import store from './store/store'
 
 Vue.config.productionTip = false
 
+import 'bootstrap'
+
 //  axios
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -13,9 +15,12 @@ Vue.use(VueAxios, axios)
 // -----------
 
 // vue-awesome
-import 'vue-awesome/icons/flag'
 import 'vue-awesome/icons/search'
+import 'vue-awesome/icons/spinner'
+import 'vue-awesome/icons/angle-left'
+import 'vue-awesome/icons/angle-right'
 import 'vue-awesome/icons/shopping-cart'
+import 'vue-awesome/icons/trash-alt'
 
 import Icon from 'vue-awesome/components/Icon'
 Vue.component('v-icon', Icon)
@@ -28,8 +33,16 @@ Vue.component('Loading', Loading)
 // ----------
 
 // vee-validate
-// 已安裝未啟用
+import VeeValidate, {Validator} from 'vee-validate'
+import zhTW from 'vee-validate/dist/locale/zh_TW'
+Validator.localize('zh_TW', zhTW)
+Vue.use(VeeValidate)
 // -----------
+
+// filter
+import currencyFilter from '@/filters/currency'
+Vue.filter('currency', currencyFilter)
+// ----------
 
 
 /* eslint-disable no-new */

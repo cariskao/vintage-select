@@ -8,6 +8,7 @@ import AboutUs from '@/components/pages/AboutUs'
 import BrandIntro from '@/components/pages/BrandIntro'
 import Shopping from '@/components/pages/Shopping'
 import Cart from '@/components/pages/Cart'
+import OrderCheckout from '@/components/pages/OrderCheckout'
 import ProductList from '@/components/ProductList'
 import ProductDetail from '@/components/ProductDetail'
 
@@ -47,6 +48,10 @@ export default new Router({
         {
           path: 'cart',
           component: Cart
+        },
+        {
+          path: 'order/:orderId',
+          component: OrderCheckout
         },
 
       ]

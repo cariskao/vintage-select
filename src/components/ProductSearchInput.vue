@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <input type="text"
+  <div class="input-group">
+    <input type="text" class="form-control" aria-label="搜尋商品" aria-describedby="btnGroupAddon"
       placeholder="搜尋商品"
       v-model.trim="searchFilter"
       @input="searchProductsDebounce(searchFilter)"
     >
-    <button
-      @click="searchProducts(searchFilter)"
-    ><v-icon name="search"/></button>
+    <div class="input-group-prepend">
+      <button class="btn btn-primary rounded-right"
+        @click="searchProducts(searchFilter)"
+      ><v-icon name="search"/></button>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -29,6 +32,12 @@ export default {
         this.searchFilter = ''
       }
     },
+    // debounce的關係，會讓頁面又跳回search
+    // searchFilter(){
+    //   if(!this.searchFilter){
+    //     this.$router.push('/shopping/all?page=1')
+    //   }
+    // }
   },
   created(){
     this.searchProductsDebounce = debounce(this.searchProducts, 500)

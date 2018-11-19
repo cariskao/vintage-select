@@ -7,7 +7,13 @@ export default {
     cart: {
       carts: []
     },
+    freight: 150,
     isPageLoading: false,
+  },
+  getters: {
+    cartsAmount(state){
+      return state.cart.carts.length
+    }
   },
   mutations: {
     setCart(state, cart){
@@ -15,7 +21,16 @@ export default {
     },
     setPageLoading(state, boolean){
       state.isPageLoading = boolean
-    }
+    },
+    setUserInfo(state, data){
+      state.userInfo = data
+    },
+    setPayInfo(state, data){
+      state.payInfo = data
+    },
+    setInvoice(state, data){
+      state.invoice = data
+    },
   },
   actions: {
     getCart({commit}){
@@ -23,7 +38,7 @@ export default {
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/cart
       `
       commit('setPageLoading', true)
-      axios.get(API)
+      return axios.get(API)
         .then( ({data}) => {
           console.log('購物車資訊', data.data)
           commit('setCart', data.data)
@@ -81,22 +96,23 @@ export default {
       const API = `
         ${process.env.API_PATH}/api/${process.env.CUSTOM_API_PATH}/order
       `
-      commit('setPageLoading', true)
+      // commit('setPageLoading', true)
       return axios.post(API, {data: order} )
         .then( ({data}) => {
           console.log(data)
 
-          commit('setPageLoading', false)
+          // commit('setPageLoading', false)
 
-          dispatch('alert/updateMessage', {
-            message: data.message,
-            status: data.success === true
-              ? 'success'
-              : 'danger'
-          }, { root: true})
+          // dispatch('alert/updateMessage', {
+          //   message: data.message,
+          //   status: data.success === true
+          //     ? 'success'
+          //     : 'danger'
+          // }, { root: true})
 
           if(data.success){
-            router.push(`/simulate_order/${data.orderId}`)
+            dispatch('getCart')
+            router.push(`/order/${data.orderId}`)
           }
         })
         .catch(err => console.error(err))

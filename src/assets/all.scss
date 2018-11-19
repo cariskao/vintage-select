@@ -1,4 +1,50 @@
-
+@import '~bootstrap/scss/_functions.scss';
 @import './helpers/_variables.scss';
-@import './helpers/_reset.scss';
-@import './helpers/common.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+* {
+  // outline: 1px solid red;
+}
+
+html, body {
+  // height: 100%;
+}
+
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+}
+
+a {
+  transition: all 0.3s;
+  &:hover {
+    opacity: 0.5;
+    text-decoration: none;
+  }
+}
+
+.router-link-exact-active {
+  color: red !important;
+}
+
+.bg-light-gray {
+  background-color: #eeeeee;
+}
+.text-opacity-black {
+  color: rgba(black, 0.4);
+}
+
+// 清除該死的outline
+input,
+input:focus,
+button:focus,
+button:active:focus,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  box-shadow: none !important;
+  outline: none !important;
+}

@@ -1,6 +1,6 @@
 <template>
-  <ul>
-    <li
+  <ul class="nav d-flex flex-column ml-3 collapse" :id="`${category}Collapse`">
+    <li class="nav-item"
       v-for="item in filterCategory"
       :key="item"
       :class="{active: $route.query[item] === item}"
@@ -13,7 +13,7 @@
             page: 1
           }
         }"
-      >{{item}}</router-link>
+      >{{ item }}</router-link>
       
     </li>
   </ul>
