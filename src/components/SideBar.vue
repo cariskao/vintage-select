@@ -1,32 +1,43 @@
 <template>
-  <aside class="side-bar">
+  <aside class="side-bar mb-3 mb-sm-0">
     <ProductSearchInput class="mb-3"/>
     <div class="h5">分類</div>
     <ul class="nav d-flex flex-column">
       <li class="nav-item">
-        <router-link :to="{
-          path: '/shopping/all',
-          query: {
-            page: 1
-          }
-        }">全部</router-link>
+        <router-link
+          :class="color('all')"
+          :to="{
+            path: '/shopping/all',
+            query: {
+              page: 1
+            }
+          }"
+        >全部</router-link>
       </li>
       <li class="nav-item">
-        <router-link :to="{
-          path: '/shopping/sale',
-          query: {
-            page: 1
-          }
-        }">特價</router-link>
+        <router-link 
+          :class="color('sale')"
+          :to="{
+            path: '/shopping/sale',
+            query: {
+              page: 1
+            }
+          }"
+        >特價</router-link>
       </li>
       <li class="nav-item">
-        <!-- <a data-toggle="collapse" data-target="#typeCollapse">類型</a> -->
-        <span>類別</span>
-        <SideBarCollapse category="type"/>
+        <a class="text-secondary" href="#" @click.prevent="currentFilter = 'type'">類別</a>
+        <SideBarCollapse
+          category="type"
+          v-if="currentFilter === 'type'"
+        />
       </li>
       <li class="nav-item">
-        <span>品牌</span>
-        <SideBarCollapse category="brand"/>
+        <a class="text-secondary" href="#" @click.prevent="currentFilter = 'brand'">品牌</a>
+        <SideBarCollapse
+          category="brand"
+          v-if="currentFilter === 'brand'"
+        />
       </li>
     </ul>
   </aside>
@@ -43,8 +54,8 @@ export default {
     SideBarCollapse
   },
   data(){
-    return{
-      // current: '' 還沒用到
+    return {
+      currentFilter: this.$route.params.filter
     }
   },
   computed: {
@@ -54,14 +65,24 @@ export default {
       'brandCategoryFilter',
       'typeCategoryFilter',
       'onSaleProducts'
-    ])
+    ]),
+    // 連結顏色還是要參考此
+    currentFilterComputed(){
+      return this.$route.params.filter
+    }
   },
   methods: {
     ...mapActions('product', ['getProducts']),
+    color(filter){
+      return {
+        'text-primary': filter === this.currentFilterComputed,
+        'text-secondary': filter !== this.currentFilterComputed
+      }
+    }
   },
   watch: {
     $route(){
-      
+      this.currentFilter = this.$route.params.filter
     }
   },
   mounted(){

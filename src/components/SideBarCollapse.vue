@@ -1,11 +1,11 @@
 <template>
-  <ul class="nav d-flex flex-column ml-3 collapse" :id="`${category}Collapse`">
+  <ul class="nav d-flex flex-column ml-3">
     <li class="nav-item"
       v-for="item in filterCategory"
       :key="item"
-      :class="{active: $route.query[item] === item}"
     >
       <router-link
+        :class="color(item)"
         :to="{
           path: `/shopping/${category}`,
           query: {
@@ -28,15 +28,24 @@ export default {
     }
   },
   computed: {
+    currentFilter(){
+      return this.$route.params.filter
+    },
     filterCategory(){
       return this.$store.getters[ `product/${this.category}CategoryFilter` ]
     },
   },
+  methods: {
+    color(category){
+      return {
+        'text-primary': this.$route.query[this.currentFilter] === category,
+        'text-secondary': this.$route.query[this.currentFilter] !== category
+      }
+    }
+    
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.active {
-  color: blue;
-}
 </style>

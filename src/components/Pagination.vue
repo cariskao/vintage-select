@@ -16,28 +16,26 @@
       </div>
     </div>
 
-    <ul class="pagination d-flex m-0"
+    <ul class="pagination d-flex m-0 overflow"
       v-if="totalPage > 1"
     >
       <li class="p-1" v-if="currentPage !== 1">
-        <router-link class="p-2 d-flex justify-content-center align-items-center text-dark"
+        <router-link class="p-2 d-flex justify-content-center align-items-center text-secondary"
           :to="linkTo(currentPage - 1)"
-          @click.native="scrollToTop"
         ><v-icon name="angle-left" scale="1.4"/></router-link>
       </li>
       <li class="h5 p-1 mb-0 d-flex justify-content-center align-items-center"
         v-for="page in totalPage"
         :key="page"
       >
-        <router-link class="p-2 text-dark"
+        <router-link class="p-2"
+          :class="color(page)"
           :to="linkTo(page)"
-          @click.native="scrollToTop"
         >{{ page }}</router-link>
       </li>
       <li class="p-1" v-if="currentPage !== totalPage">
-        <router-link class="p-2 d-flex justify-content-center align-items-center text-dark" 
+        <router-link class="p-2 d-flex justify-content-center align-items-center text-secondary" 
           :to="linkTo(currentPage + 1)"
-          @click.native="scrollToTop"
         ><v-icon name="angle-right" scale="1.4"/></router-link>
       </li>
     </ul>
@@ -109,6 +107,12 @@ export default {
       query.page = page 
       return { query }
     },
+    color(page){
+      return {
+        'text-primary': page === this.currentPage,
+        'text-secondary': page !== this.currentPage
+      }
+    },
     setPageLimit(val){
       this.$store.commit('product/setPageLimit', val)
       // 如果總頁數小於當前頁面，跳轉到最後一頁
@@ -116,13 +120,12 @@ export default {
         this.$router.push( this.linkTo(this.totalPage) )
       }
     },
-    scrollToTop(){
-      window.scrollTo(0, 0)
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-
+.overflow {
+  overflow-x: auto;
+}
 </style>

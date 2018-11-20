@@ -3,16 +3,14 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 
-* {
-  // outline: 1px solid red;
-}
-
-html, body {
-  // height: 100%;
-}
+// html, body {
+//   height: auto;
+//   min-height: 100%;
+// }
 
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  height: 100%;
 }
 
 a {
@@ -21,10 +19,6 @@ a {
     opacity: 0.5;
     text-decoration: none;
   }
-}
-
-.router-link-exact-active {
-  color: red !important;
 }
 
 .bg-light-gray {

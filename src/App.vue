@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import scrollToTop from '@/functions/scrollToTop'
 import Header from '@/components/Header'
 import Alert from '@/components/Alert'
 import Footer from '@/components/Footer'
@@ -19,6 +20,11 @@ export default {
     Header,
     Alert,
     Footer
+  },
+  watch: {
+    $route(){
+      scrollToTop()
+    }
   }
 }
 </script>

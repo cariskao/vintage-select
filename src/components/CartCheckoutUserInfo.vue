@@ -121,12 +121,6 @@ export default {
       })
     }
   },
-  // created(){
-  //   this.userInfo = cloneDeep(this.$store.state.cart.userInfo)
-  // },
-  // beforeDestroy(){
-  //   this.setUserInfo(this.userInfo)
-  // }
 }
 </script>
 

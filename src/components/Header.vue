@@ -7,8 +7,10 @@
 
       <router-link class="navbar-brand font-italic mr-0 mr-sm-3" to="/index">Vintage Select</router-link>
 
-      <div class="cart-btn-box order-sm-5">
-        <router-link class="nav-link text-secondary d-flex justify-content-center align-items-center" to="/cart">
+      <div class="cart-btn-box order-sm-5" :class="isActive('cart')">
+        <router-link class="nav-link d-flex justify-content-center align-items-center" to="/cart"
+          :class="isActive('cart')"
+        >
           <v-icon name="shopping-cart" scale="1.4"/>
         </router-link>
         <div class="cart-label rounded-circle border border-white"
@@ -18,17 +20,20 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <router-link class="nav-link" to="/index">首頁</router-link>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/index"
+              :class="isActive('index')"
+            >首頁</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/aboutus">關於我們</router-link>
+            <router-link class="nav-link" to="/brandintro"
+              :class="isActive('brandintro')"
+            >品牌介紹</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/brandintro">品牌介紹</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/shopping/all?page=1">購物商城</router-link>
+            <router-link class="nav-link" to="/shopping/all?page=1"
+              :class="isActive('shopping')"
+            >購物商城</router-link>
           </li>
         </ul>
       </div>
@@ -41,10 +46,19 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
-    ...mapGetters('cart', ['cartsAmount'])
+    ...mapGetters('cart', ['cartsAmount']),
+    currentPage(){
+      return this.$route.path.split('/')[1]
+    }
   },
   methods: {
-    ...mapActions('cart', ['getCart'])
+    ...mapActions('cart', ['getCart']),
+    isActive(page){
+      return {
+        'text-primary': page === this.currentPage,
+        'text-secondary': page !== this.currentPage
+      }
+    }
   },
   mounted(){
     this.getCart()

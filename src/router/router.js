@@ -4,13 +4,18 @@ Vue.use(Router)
 
 import App from '@/App'
 import Index from '@/components/pages/Index'
-import AboutUs from '@/components/pages/AboutUs'
 import BrandIntro from '@/components/pages/BrandIntro'
 import Shopping from '@/components/pages/Shopping'
 import Cart from '@/components/pages/Cart'
 import OrderCheckout from '@/components/pages/OrderCheckout'
+import PageRouterView from '@/components/PageRouterView'
 import ProductList from '@/components/ProductList'
 import ProductDetail from '@/components/ProductDetail'
+import BrandDetail from '@/components/BrandDetail'
+import BrandNBHD from '@/components/BrandNBHD'
+import BrandWTAPS from '@/components/BrandWTAPS'
+import BrandCRHT from '@/components/BrandCRHT'
+import BrandVISVIM from '@/components/BrandVISVIM'
 
 export default new Router({
   routes: [
@@ -24,12 +29,35 @@ export default new Router({
           component: Index
         },
         {
-          path: 'aboutus',
-          component: AboutUs
-        },
-        {
           path: 'brandintro',
-          component: BrandIntro,
+          component: PageRouterView,
+          children: [
+            {
+              path: '',
+              component: BrandIntro
+            },
+            // {
+            //   path: ':brand',
+            //   name: 'brandDetail',
+            //   component: BrandDetail
+            // },
+            {
+              path: 'neighborhood',
+              component: BrandNBHD
+            },
+            {
+              path: 'wtaps',
+              component: BrandWTAPS
+            },
+            {
+              path: 'carharttwip',
+              component: BrandCRHT
+            },
+            {
+              path: 'visvim',
+              component: BrandVISVIM
+            }
+          ]
         },
         {
           path: 'shopping',

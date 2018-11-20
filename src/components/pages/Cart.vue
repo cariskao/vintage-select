@@ -3,27 +3,19 @@
     <Loading :active.sync="isPageLoading"/>
 
     <Progress/>
+    <div class="jumbotron text-center" v-if="cart.carts.length === 0">
+      <div class="h4 mb-5">購物車內無商品</div>
+      <router-link class="btn btn-lg btn-primary" to="/shopping/all?page=1">前往商城</router-link>
 
-    <div class="h4 text-center" v-if="cart.carts.length === 0">
-      購物車內無商品
     </div>
     <div v-else class="row">
 
-      <div class="col-sm-8">
-        <CartContent
-          v-if="status === 0"
-          :carts="cart.carts"
-        />
-
-        <CartCheckoutUserInfo
-          v-if="status === 1"
-          @nextProgress="status += 1"
-        />
-
-        <CartCheckoutPayInfo v-if="status === 2"/>
-      </div>
-
-      <div class="col-sm-4">
+      <div class="col-sm-4 order-sm-2"
+        :class="{
+          'order-2': status === 0,
+          'mb-3': status !== 0
+        }"
+      >
         <div class="p-3 bg-light-gray">
           <div class="h4 font-weight-normal text-center text-opacity-black mb-3">訂單摘要</div>
           <hr>
@@ -71,12 +63,25 @@
         </div>
         <div class="rounded-0 py-2 btn btn-lg btn-primary btn-block"
           v-if="status === 0"
-          @click="status = 1"
-        >確認結帳</div>
+          @click="status = 1; scrollToTop()"
+        >建立訂單</div>
         <div class="rounded-0 py-2 btn btn-lg btn-primary btn-block"
           v-else
           @click="status = 0"
         >取消</div>
+      </div>
+
+      <div class="col-sm-8 order-1">
+        <CartContent
+          v-if="status === 0"
+          :carts="cart.carts"
+        />
+
+        <CartCheckoutUserInfo
+          v-if="status === 1"
+          @nextProgress="status += 1"
+        />
+
       </div>
 
     </div>
@@ -88,10 +93,10 @@
 // 購物車內容(0) -> 按下確認結帳checkout -> userinfo(1) -> createOrder
 
 import { mapState, mapActions } from 'vuex'
+import scrollToTop from '@/functions/scrollToTop'
 import Progress from '@/components/Progress'
 import CartContent from '@/components/CartContent'
 import CartCheckoutUserInfo from '@/components/CartCheckoutUserInfo'
-import CartCheckoutPayInfo from '@/components/CartCheckoutPayInfo'
 import ActionButton from '@/components/ActionButton'
 export default {
   components: {
@@ -99,7 +104,6 @@ export default {
     CartContent,
     ActionButton,
     CartCheckoutUserInfo,
-    CartCheckoutPayInfo,
   },
   data(){
     return {
@@ -112,6 +116,7 @@ export default {
     ...mapState('cart',['cart', 'freight', 'isPageLoading'])
   },
   methods: {
+    scrollToTop,
     ...mapActions('cart', ['getCart']),
     useCoupon(){
       if(!this.couponCode) return

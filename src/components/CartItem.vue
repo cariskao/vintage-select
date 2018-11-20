@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex align-items-center">
-      <img class="img-fluid mr-4" width="150" height="150" :src="cartItemInfo.product.imageUrl" alt="">
+      <img class="img-fluid mr-4 d-none d-sm-inline" width="150" height="150" :src="cartItemInfo.product.imageUrl" alt="">
 
       <div class="align-middle">
         {{ cartItemInfo.product.title }}
