@@ -44,7 +44,6 @@
 </template>
 
 <script>
-// 或許可以拆為SideBarMenu
 import { mapState, mapGetters, mapActions } from 'vuex'
 import ProductSearchInput from '@/components/ProductSearchInput'
 import SideBarCollapse from '@/components/SideBarCollapse'

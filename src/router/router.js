@@ -11,7 +11,6 @@ import OrderCheckout from '@/components/pages/OrderCheckout'
 import PageRouterView from '@/components/PageRouterView'
 import ProductList from '@/components/ProductList'
 import ProductDetail from '@/components/ProductDetail'
-import BrandDetail from '@/components/BrandDetail'
 import BrandNBHD from '@/components/BrandNBHD'
 import BrandWTAPS from '@/components/BrandWTAPS'
 import BrandCRHT from '@/components/BrandCRHT'
@@ -36,11 +35,6 @@ export default new Router({
               path: '',
               component: BrandIntro
             },
-            // {
-            //   path: ':brand',
-            //   name: 'brandDetail',
-            //   component: BrandDetail
-            // },
             {
               path: 'neighborhood',
               component: BrandNBHD
