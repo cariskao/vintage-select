@@ -1,4 +1,4 @@
-# vue-final-front
+# Vintage Select
 
 > A Vue.js project with vuex module
 > Vintage Select 古著選物平台(個人練習作品，無商業用途)
