@@ -1,8 +1,11 @@
 # Vintage Select
 
 > A Vue.js project with vuex module
+
 > Vintage Select 古著選物平台(個人練習作品，無商業用途)
+
 > 另有後台做商品管理
+
 > API sorce：hexschool
 
 ## Build Setup
