@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', 'Microsoft JhengHei', Helvetica, Arial, sans-serif;
   height: 100%;
 }
 
@@ -27,7 +27,7 @@ a {
   color: rgba(black, 0.4);
 }
 
-// 清除該死的outline
+// 清除outline
 input,
 input:focus,
 button:focus,
