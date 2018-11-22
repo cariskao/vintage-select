@@ -7,10 +7,6 @@
         :key="index"
       >{{ item.message }}</div>
     </transition-group>
-    <!-- <div class="alert border-0"
-      :class="`alert-${item.status}`"
-      v-for="(item, index) in messages" :key="index"
-    >{{ item.message }}</div> -->
   </div>
 </template>
 

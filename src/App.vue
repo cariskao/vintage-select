@@ -1,11 +1,12 @@
 <template>
-  <div id="app" class="h-100">
-    <Header/>
-    <div class="h-100 d-flex flex-column">
+  <div id="app" class="h-100 d-flex flex-column">
+    <div class=" mb-3">
+      <Header/>
       <Alert/>
       <router-view/>
-      <Footer/>
     </div>
+
+    <Footer/>
   </div>
 </template>
 
@@ -32,3 +33,4 @@ export default {
 <style lang="scss">
 @import '@/assets/all.scss';
 </style>
+

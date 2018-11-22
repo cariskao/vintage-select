@@ -32,12 +32,6 @@ export default {
         this.searchFilter = ''
       }
     },
-    // debounce的關係，會讓頁面又跳回search
-    // searchFilter(){
-    //   if(!this.searchFilter){
-    //     this.$router.push('/shopping/all?page=1')
-    //   }
-    // }
   },
   created(){
     this.searchProductsDebounce = debounce(this.searchProducts, 500)

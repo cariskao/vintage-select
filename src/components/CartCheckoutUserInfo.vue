@@ -73,7 +73,6 @@
 </template>
 
 <script>
-// import cloneDeep from 'lodash/clonedeep'
 import { mapMutations, mapActions } from 'vuex'
 import ActionButton from '@/components/ActionButton'
 export default {
@@ -112,7 +111,6 @@ export default {
       this.$validator.validate().then(result => {
         if (result) {
           this.isLoading = true
-          // console.log(this.createOrderAction)
           this.createOrderAction(this.order)
             .then(() => {
               this.isLoading = false

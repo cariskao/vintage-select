@@ -119,8 +119,7 @@ export default {
               : 'danger'
           }, { root: true})
 
-          // 要給按鈕判斷啟用，因此拿到productDetail組件內then來dispatch
-          // dispatch('cart/getCart', null, { root: true } )
+          // 要給按鈕判斷啟用，因此拿到productDetail組件內then來dispatch getCart
         })
         .catch(err => console.error(err))
     },

@@ -78,7 +78,6 @@
 </template>
 
 <script>
-// 測試用id -LRa30F8W7lW3ndXQHi5  -LRb7APBqvEdbEAMhUfR
 import { mapActions, mapState, mapMutations } from 'vuex'
 export default {
   computed: {
@@ -97,7 +96,7 @@ export default {
     payOrder(){
       this.setPageLoading(true)
       this.$store.dispatch('order/payOrder', this.orderId)
-        .then((data) => {
+        .then(data => {
           this.$store.dispatch('alert/updateMessage', {
             message: data.message,
             status: data.success === true

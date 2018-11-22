@@ -140,22 +140,6 @@ export default {
     })
   }
 }
-
-// amount: 1
-// category: Object
-// content: "九成新L號↵腰平量：44cm↵褲長：54cm"
-// description: "採用獨到的硫染褪色工法，展現軍褲不凡質感。"
-// id: "-LR6oiEGU42b_Wr33sIi"
-// image: ""
-// imageUrl: "https://storage.googleapis.com/vue-course-api.appspot.com/leo%2F1542024797594.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=T%2FIppNij3XB63B8mMdUdAD6wE1VAZfvbKB44%2BLJitjuAEInJPVpLEUXmSGLbaHkdTWjn9pF66zCXNfVMDc1wSQ%2FZg6lKXm2%2Fx2EsTgw3xjQpoSWuw0q%2Byo5GgQx5esDKBAIFj60OaugDrEXB%2BEARfsxQbpt192jOYs9c7oe7DzJ%2F%2ByW4aQYYLFuQkWhtfemf8Dat8yD5pGrfENA1iIoyiGHc3bV74824P9nq%2FczNQDzPeMC6fNxnT6ik7rKq%2Fddu3tidsLT5HsfQjaiulfqtW6s1w14Z8exSbO%2FPNrZgDqiTyitY6oeTwi5oMA3Wvmx%2F3H5VN4%2B6dfoxur%2Fz8itgvQ%3D%3D"
-// is_enabled: 1
-// num: 9
-// origin_price: 10980
-// price: 7680
-// title: "水洗軍事短褲"
-// unit: "件"
-
-
 </script>
 
 <style lang="scss" scoped>

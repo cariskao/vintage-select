@@ -51,21 +51,18 @@ export default {
           const type = this.$route.query.type
           return this.enabledProducts.filter(
             ({ category: {type: productType} }) => type === productType
-            // 還要做暫無資料的提示
           )
           break
         case 'brand':
           const brand = this.$route.query.brand
           return this.enabledProducts.filter(
             ({ category: {brand: productBrand} }) => brand === productBrand
-            // 還要做暫無資料的提示
           )
           break
         case 'search':
           const searchFilter = this.$route.query.search
           return this.enabledProducts.filter(
             ({ title }) => title.match(searchFilter)
-            // 還要做暫無資料的提示
           )
           break
         default:

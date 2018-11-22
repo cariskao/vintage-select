@@ -2,7 +2,6 @@
   <div class="container">
     <Loading :active.sync="isPageLoading"/>
 
-    <Progress/>
     <div class="jumbotron text-center" v-if="cart.carts.length === 0">
       <div class="h4 mb-5">購物車內無商品</div>
       <router-link class="btn btn-lg btn-primary" to="/shopping/all?page=1">前往商城</router-link>
@@ -47,7 +46,7 @@
           <div class="input-group input-group-sm"
             v-if="status === 0"
           >
-            <input type="text" class="form-control" placeholder="輸入優惠碼"
+            <input type="text" class="form-control" placeholder="輸入優惠碼 試試vip"
               v-model.trim="couponCode"
               @keydown.enter="useCoupon"
             >
@@ -94,13 +93,11 @@
 
 import { mapState, mapActions } from 'vuex'
 import scrollToTop from '@/functions/scrollToTop'
-import Progress from '@/components/Progress'
 import CartContent from '@/components/CartContent'
 import CartCheckoutUserInfo from '@/components/CartCheckoutUserInfo'
 import ActionButton from '@/components/ActionButton'
 export default {
   components: {
-    Progress,
     CartContent,
     ActionButton,
     CartCheckoutUserInfo,

@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-4 bg-dark text-white mt-4">
+  <footer class="py-4 bg-dark text-white mt-auto">
     <div class="container text-center">
       <h4 class="font-weight-light font-italic mb-3">Vintage Select</h4>
       <div class="mb-1">Copyright © 2018 by Leo</div>
